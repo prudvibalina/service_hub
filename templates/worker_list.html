@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Workers | Service Hub{% endblock %}
+
+{% block content %}
+<section class="heading">
+    <h2>Available Professionals{% if profession %} – {{ profession }}s{% endif %}</h2>
+    <p>Select the best service expert for your needs</p>
+</section>
+
+<div class="filter-bar">
+    {% for cat in ['Electrician','Plumber','Carpenter','Mechanic'] %}
+    <a href="{{ url_for('worker_list', profession=cat) }}"
+       class="filter-btn {% if profession == cat %}active{% endif %}">{{ cat }}</a>
+    {% endfor %}
+    <a href="{{ url_for('worker_list') }}" class="filter-btn {% if not profession %}active{% endif %}">All</a>
+</div>
+
+<section class="worker-container">
+    {% if workers %}
+        {% for w in workers %}
+        <div class="worker-card">
+            <div class="worker-avatar">{{ w.name[0] }}</div>
+            <div class="worker-info">
+                <h3>{{ w.name }}</h3>
+                <span class="badge">{{ w.profession }}</span>
+                <p>📍 {{ w.location }}</p>
+                <p>🏆 {{ w.experience }} yrs experience</p>
+                <p>⭐ {{ w.rating }} / 5.0</p>
+                <p>📞 {{ w.mobile }}</p>
+                <div class="worker-actions">
+                    {% if w.available %}
+                        {% if user %}
+                            <a href="tel:{{ w.mobile }}" class="btn-contact">Call Now</a>
+                        {% else %}
+                            <a href="{{ url_for('login') }}" class="btn-contact">Login to Contact</a>
+                        {% endif %}
+                        <span class="available-badge">Available</span>
+                    {% else %}
+                        <span class="unavailable-badge">Unavailable</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-results">
+            <p>No workers found{% if profession %} for {{ profession }}{% endif %}.</p>
+            <a href="{{ url_for('worker_register') }}" class="btn-primary">Be the First to Register!</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

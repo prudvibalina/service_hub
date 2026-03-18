@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Profile | Service Hub{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="auth-container profile-card">
+        <div class="profile-avatar">{{ user.name[0] }}</div>
+        <h2>{{ user.name }}</h2>
+        <table class="profile-table">
+            <tr><td>Username</td><td>{{ user.username }}</td></tr>
+            <tr><td>Location</td><td>{{ user.location }}</td></tr>
+            <tr><td>Mobile</td><td>{{ user.mobile }}</td></tr>
+            <tr><td>Joined</td><td>{{ user.created_at.strftime('%B %Y') }}</td></tr>
+        </table>
+        <a href="{{ url_for('logout') }}" class="btn-primary" style="margin-top:20px;display:inline-block">Logout</a>
+    </div>
+</section>
+{% endblock %}

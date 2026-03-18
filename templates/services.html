@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Services | Service Hub{% endblock %}
+
+{% block content %}
+<section class="heading">
+    <h2>Our Services</h2>
+    <p>Choose a category to find the best professionals</p>
+</section>
+
+<section class="services-container">
+    {% set service_data = [
+        ('Electrician', 'https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600', 'Electrical repairs, wiring & installations'),
+        ('Plumber',     'https://images.pexels.com/photos/8486972/pexels-photo-8486972.jpeg?auto=compress&cs=tinysrgb&w=600', 'Leakage fixing, pipe repair & fittings'),
+        ('Carpenter',   'https://images.pexels.com/photos/1094767/pexels-photo-1094767.jpeg?auto=compress&cs=tinysrgb&w=600', 'Furniture work & wood repair services'),
+        ('Mechanic',    'https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=600', 'Two & four wheeler repair services')
+    ] %}
+
+    {% for name, img, desc in service_data %}
+    <div class="service-card">
+        <img src="{{ img }}" alt="{{ name }}">
+        <h3>{{ name }}</h3>
+        <p>{{ desc }}</p>
+        <a href="{{ url_for('worker_list', profession=name) }}" class="btn-explore">Explore</a>
+    </div>
+    {% endfor %}
+</section>
+
+<div style="text-align:center;margin:40px 0;">
+    <a href="{{ url_for('worker_register') }}" class="btn-primary">Register as a Worker</a>
+</div>
+{% endblock %}

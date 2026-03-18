@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Service Hub – Find Trusted Professionals{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Find Trusted Service Professionals</h1>
+    <p>Book electricians, plumbers, carpenters and more near you.</p>
+
+    <form class="search-box" action="{{ url_for('worker_list') }}" method="GET">
+        <input type="text" name="search" placeholder="Search by profession or name...">
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<section class="categories">
+    <h2>Popular Services</h2>
+    <div class="category-container">
+        <a class="card" href="{{ url_for('worker_list', profession='Electrician') }}">
+            <h3>⚡ Electrician</h3>
+            <p>Professional electrical services</p>
+        </a>
+        <a class="card" href="{{ url_for('worker_list', profession='Plumber') }}">
+            <h3>🔧 Plumber</h3>
+            <p>Expert plumbing solutions</p>
+        </a>
+        <a class="card" href="{{ url_for('worker_list', profession='Carpenter') }}">
+            <h3>🪵 Carpenter</h3>
+            <p>Furniture &amp; wood work services</p>
+        </a>
+        <a class="card" href="{{ url_for('worker_list', profession='Mechanic') }}">
+            <h3>🔩 Mechanic</h3>
+            <p>Two &amp; four wheeler repair</p>
+        </a>
+    </div>
+</section>
+{% endblock %}
